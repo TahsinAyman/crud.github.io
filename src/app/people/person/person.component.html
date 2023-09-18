@@ -1,0 +1,115 @@
+<div class="p-4">
+  <button
+    routerLink="../.."  
+    class="pt-2 pb-2 pl-4 pr-4 bg-blue-500 text-white hover:bg-blue-600 shadow-lg rounded-lg transition cursor-pointer"
+  >
+    Go Back
+  </button>
+  <br />
+  <br />
+  <form [formGroup]="personForm" *ngIf="person || mode == 'CREATE'" (ngSubmit)="submit()">
+    <div>
+      <h1>Person</h1>
+    </div>
+    <div>
+      <label>Name</label>
+      <input
+        type="text"
+        class="border border-gray-500 w-full p-2 shadow-lg outline-none focus:border-gray-900"
+        placeholder="Name"
+        formControlName="name"
+      />
+      <p
+        *ngIf="
+          personForm.get('name')?.touched &&
+          personForm.get('name')?.hasError('required')
+        "
+        class="text-red-500"
+      >
+        Name is Required
+      </p>
+      <p
+        *ngIf="
+          personForm.get('name')?.touched &&
+          personForm.get('name')?.hasError('minlength')
+        "
+        class="text-red-500"
+      >
+        Name must be 3 characters long
+      </p>
+    </div>
+    <br />
+    <div>
+      <label>Age</label>
+      <input
+        type="number"
+        class="border border-gray-500 w-full p-2 shadow-lg outline-none focus:border-gray-900"
+        placeholder="Age"
+        formControlName="age"
+      />
+      <p
+        *ngIf="
+          personForm.get('age')?.touched &&
+          personForm.get('age')?.hasError('required')
+        "
+        class="text-red-500"
+      >
+        Age is Required
+      </p>
+      <p
+        *ngIf="
+          personForm.get('age')?.touched &&
+          personForm.get('age')?.hasError('min')
+        "
+        class="text-red-500"
+      >
+        Age is not valid
+      </p>
+    </div>
+    <br />
+    <div>
+      <label>Email</label>
+      <input
+        type="email"
+        class="border border-gray-500 w-full p-2 shadow-lg outline-none focus:border-gray-900"
+        placeholder="Email"
+        formControlName="email"
+      />
+      <p
+        *ngIf="
+          personForm.get('email')?.touched &&
+          personForm.get('email')?.hasError('required')
+        "
+        class="text-red-500"
+      >
+        Email is Required
+      </p>
+      <p
+        *ngIf="
+          personForm.get('email')?.touched &&
+          personForm.get('email')?.hasError('email')
+        "
+        class="text-red-500"
+      >
+        Email is not valid
+      </p>
+    </div>
+    <br />
+    <div>
+      <button
+        class="{{ mode == 'CREATE' ? 'rounded-lg' : 'rounded-l-lg' }} pt-2 pb-2 pl-4 pr-4 bg-blue-500 text-white hover:bg-blue-600 shadow-lg transition"
+        (click)="mode != 'CREATE' ? setUpdateMode() : null"
+      >
+        Save
+      </button>
+      <button
+        class="pt-2 pb-2 pl-4 pr-4 bg-red-500 text-white hover:bg-red-600 rounded-r-lg shadow-lg transition"
+        *ngIf="mode != 'CREATE'"
+        (click)="setDeleteMode()"
+      >
+        Delete
+      </button>
+    </div>
+  </form>
+</div>
+<app-popup [popup]="popup"></app-popup>

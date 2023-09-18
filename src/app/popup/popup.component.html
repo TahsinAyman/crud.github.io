@@ -1,0 +1,19 @@
+<div
+  class="fixed bottom-0 right-0 m-4 pt-3 pl-2 pr-2 bg-black bg-opacity-50 shadow-md rounded-lg border"
+  [class]="popup.open === true ? 'block' : 'hidden'"
+  [class]="
+    popup.open === false
+      ? 'hidden'
+      : popup.type === 'error'
+      ? 'border-red-500'
+      : popup.type === 'success'
+      ? 'border-green-500'
+      : popup.type === 'warning'
+      ? 'border-yellow-500'
+      : popup.type === 'info'
+      ? 'border-blue-500'
+      : 'border-transparent'
+  "
+>
+  <p class="text-white">{{ popup.message }}</p>
+</div>

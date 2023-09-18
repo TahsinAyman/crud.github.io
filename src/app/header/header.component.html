@@ -1,0 +1,23 @@
+<div class="bg-blue-500 p-4 flex justify-between items-center">
+  <a routerLink="/people" class="text-white text-xl font-semibold">CRUD</a>
+  <div *ngIf="!loggedIn()">
+    <a
+      routerLink="/auth/register"
+      class="text-white text-sm hover:text-blue-200 mr-4"
+    >
+      <span class="text-2xl">Register</span>
+    </a>
+    
+    <a routerLink="/auth/login" class="text-white text-lg hover:text-blue-200">
+      <span class="text-2xl">Login</span>
+    </a>
+  </div>
+  <div *ngIf="loggedIn()">
+    <a class="text-white text-lg hover:text-blue-200 mr-4" routerLink="/auth/logout"
+      >Logout</a
+    >
+    <a routerLink="/people/save" class="text-white text-lg hover:text-blue-200">
+      <span class="text-2xl">+</span>
+    </a>
+  </div>
+</div>

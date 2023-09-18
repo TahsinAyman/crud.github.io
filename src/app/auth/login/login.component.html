@@ -1,0 +1,70 @@
+<form
+  class="m-8 p-8 bg-white bg-opacity-20 backdrop-blur-md rounded-3xl mt-12"
+  (ngSubmit)="submit()"
+  [formGroup]="loginForm"
+>
+  <div>
+    <h1 class="text-3xl text-center">Login</h1>
+  </div>
+  <div class="mb-12 mt-12"> 
+    <label>Email</label>
+    <input
+      type="email"
+      class="w-full h-10 p-2 bg-transparent border border-black outline-non rounded-lg"
+      placeholder="Email"
+      formControlName="email"
+    />
+    <p
+      class="text-red-400"
+      *ngIf="
+        loginForm.get('email')?.touched &&
+        loginForm.get('email')?.hasError('required')
+      "
+    >
+      Email is Required
+    </p>
+    <p
+      class="text-red-400"
+      *ngIf="
+        loginForm.get('email')?.touched &&
+        loginForm.get('email')?.hasError('email')
+      "
+    >
+      Not a valid mail
+    </p>
+  </div>
+  <div>
+    <label>Password</label>
+    <input
+      type="password"
+      class="w-full h-10 p-2 bg-transparent border border-black outline-non rounded-lg"
+      placeholder="••••••••"
+      formControlName="password"
+    />
+    <p
+      class="text-red-400"
+      *ngIf="
+        loginForm.get('password')?.touched &&
+        loginForm.get('password')?.hasError('required')
+      "
+    >
+      Password is Required
+    </p>
+    <p
+      class="text-red-400"
+      *ngIf="
+        loginForm.get('password')?.touched &&
+        loginForm.get('password')?.hasError('minlength')
+      "
+    >
+      Password must be greater then 6 characters
+    </p>
+  </div>
+  <div class="mt-10">
+    <a href="/auth/register" class="underline text-">Don't Have an account? Create one</a>
+  </div>
+  <div class="text-center mt-12">
+    <button class="bg-blue-500 pt-2 pb-2 pl-4 pr-4 text-white rounded-lg shadow-lg hover:bg-blue-700 transition">Login</button>
+  </div>
+</form>
+<app-popup [popup]="popup" />

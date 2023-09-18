@@ -1,0 +1,80 @@
+<div class="p-4 w-full">
+  <div class="flex">
+    <input
+      type="search"
+      class="border border-gray-500 p-2 outline-none flex-1"
+      placeholder="Search"
+      [(ngModel)]="search"
+    />
+    <button
+      class="pt-2 pb-2 pl-4 pr-4 bg-blue-500 text-white hover:bg-blue-600"
+      (click)="onSearch()"
+    >
+      Search
+    </button>
+  </div>
+  <br />
+  <table class="w-full text-left border-gray-700 border">
+    <tr>
+      <th
+        class="p-2 border-gray-700 border hover:bg-black hover:bg-opacity-10 cursor-pointer"
+        (click)="onOrderByChange('id')"
+      >
+        ID
+      </th>
+      <th
+        class="p-2 border-gray-700 border hover:bg-black hover:bg-opacity-10 cursor-pointer"
+        (click)="onOrderByChange('name')"
+      >
+        Name
+      </th>
+      <th
+        class="p-2 border-gray-700 border hover:bg-black hover:bg-opacity-10 cursor-pointer"
+        (click)="onOrderByChange('age')"
+      >
+        Age
+      </th>
+      <th
+        class="p-2 border-gray-700 border hover:bg-black hover:bg-opacity-10 cursor-pointer"
+        (click)="onOrderByChange('email')"
+      >
+        Email
+      </th>
+    </tr>
+    <tr
+      *ngFor="let person of persons"
+      class="hover:bg-black hover:bg-opacity-5 cursor-pointer"
+      routerLink="./person/{{ person['id'] }}"
+    >
+      <td class="p-2 border-gray-700 border">{{ person["id"] }}</td>
+      <td class="p-2 border-gray-700 border">{{ person["name"] }}</td>
+      <td class="p-2 border-gray-700 border">{{ person["age"] }}</td>
+      <td class="p-2 border-gray-700 border">{{ person["email"] }}</td>
+    </tr>
+  </table>
+  <br />
+  Limit:
+  <input
+    type="number"
+    class="border border-gray-500 w-12 p-1"
+    [(ngModel)]="limit"
+  />
+  Page:
+  <select [(ngModel)]="page" class="border border-gray-500 p-1.5 outline-none">
+    <option *ngFor="let page of pages" [value]="page">{{ page }}</option>
+  </select>
+  Sort By:
+  <select
+    class="border border-gray-500 p-1.5 outline-none"
+    [(ngModel)]="sortBy"
+  >
+    <option value="asc">ascending</option>
+    <option value="desc">descending</option>
+  </select>
+  <button
+    (click)="onLimitOrPageChange()"
+    class="ml-2 hover:bg-blue-600 rounded-lg pt-1.5 pb-1.5 pl-4 pr-4 text-white bg-blue-500"
+  >
+    Reload
+  </button>
+</div>
